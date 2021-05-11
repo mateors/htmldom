@@ -2,17 +2,23 @@ const body=document.body;
 const head=document.head;
 //console.log(head.getBoundingClientRect());
 
+//var sheet = document.createElement('style');
+//sheet.innerHTML = "div:hover {border: 2px solid gold; background-color: gray;}";
+//sheet.innerHTML= "div:hover{border: 2px solid gold;}";
+//document.head.appendChild(sheet);
+
 const div = document.createElement("div");
 div.setAttribute("id", "wrapper");
 div.style.borderColor="#FF0000FF";
 div.style.borderStyle="solid";
+div.style.boxSizing='border-box';
 div.style.position="absolute";//moving div
 div.style.left='500px';//moving div
 div.style.top='200px';//moving div
 div.style.width='500px';
 div.style.height='200px';
 div.style.borderWidth='2px';
-div.style.boxSizing='border-box';
+
 
 //div.setAttribute("style", "width:500px;height:200px;border-style:solid;border-color:red;border-width:1px;");
 div.textContent="Hello world";

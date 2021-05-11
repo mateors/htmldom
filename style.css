@@ -4,3 +4,8 @@
     position: absolute;
     background: orange;
 }
+
+#wrapper:hover {
+    /* background: orange; */
+    border: 2px solid gold;
+}
