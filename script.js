@@ -18,6 +18,7 @@ div.style.top='200px';//moving div
 div.style.width='500px';
 div.style.height='200px';
 div.style.borderWidth='2px';
+div.style.cursor="move"; //move crosshair grab
 
 
 //div.setAttribute("style", "width:500px;height:200px;border-style:solid;border-color:red;border-width:1px;");
@@ -34,7 +35,7 @@ wrapper.addEventListener("mousedown", mousedown);
 
 function mousedown(e){
 
-    //console.log(e.clientX);
+    console.log(`${e.clientX},${e.clientY}`);
     window.addEventListener("mousemove", mousemove);
     window.addEventListener("mouseup", mouseup);
 
