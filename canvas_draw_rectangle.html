@@ -5,25 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cnvas Draw</title>
+    <style>
+      #canvas{
+        cursor: crosshair;
+      }
+    </style>
 </head>
-<body>
+<body id="canvas1">
     
 <canvas id="canvas" width="800" height="500" style="background-color:#FFFBF580;"></canvas>
 
 <script>
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
+    //console.log(ctx);
+
     var canvasx = canvas.offsetLeft;
     var canvasy = canvas.offsetTop;
     var last_mousex = last_mousey = 0;
     var mousex = mousey = 0;
+    
     var mousedown = false;
-
     console.log(`${canvasx}-${canvasy}`);
-
     canvas.addEventListener("mousedown", function(e){
 
-      console.log(`${e.clientX},${e.clientY}`);
+      console.log(`mDown: ${e.clientX},${e.clientY}`);
       last_mousex = parseInt(e.clientX-canvasx);
 	    last_mousey = parseInt(e.clientY-canvasy);
       mousedown = true;
@@ -32,12 +38,14 @@
 
     canvas.addEventListener("mouseup", function(e){
       mousedown = false;
+      console.log(`mUp: ${e.clientX},${e.clientY}`);
+      console.log(`mUp: ${e.clientX},${e.clientY}`);
     });
 
     canvas.addEventListener("mousemove", function(e){
 
-      mousex = parseInt(e.clientX-canvasx);
-	    mousey = parseInt(e.clientY-canvasy);
+        mousex = parseInt(e.clientX-canvasx);
+	      mousey = parseInt(e.clientY-canvasy);
 
         if(mousedown) {
             ctx.clearRect(0,0,canvas.width,canvas.height); //clear canvas
