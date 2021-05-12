@@ -17,7 +17,8 @@
 
         window.addEventListener("mousedown", function(e){
 
-            console.log(`mDown: ${e.clientX},${e.clientY}`);
+            
+            console.log(`mDown: ${e.clientX},${e.clientY},${e.offsetX},${e.type}`);
             // last_mousex = parseInt(e.clientX-canvasx);
             // last_mousey = parseInt(e.clientY-canvasy);
             mousedown = true;
@@ -31,6 +32,15 @@
 
             //console.log(`mUp: ${e.clientX},${e.clientY}`);
             if (mousedown){
+
+                var itemCount = document.body.children.length;
+                console.log(itemCount);
+                for(var i=0; i<itemCount-1; i++){ //remove all item except last one
+                    var item=document.body.children.item(i);
+                    if(item.tagName=="DIV") {
+                        document.body.removeChild(item)
+                    }
+                }
 
                 console.log(`mousemove: ${e.clientX},${e.clientY}`); 
                 var width=parseInt(e.clientX-prevX);
