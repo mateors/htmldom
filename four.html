@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fourth time</title>
+</head>
+<body>
+    
+
+    <script>
+
+        var mousedown=false;
+        var prevX=0;
+        var prevY=0
+
+        window.addEventListener("mousedown", function(e){
+
+            console.log(`mDown: ${e.clientX},${e.clientY}`);
+            // last_mousex = parseInt(e.clientX-canvasx);
+            // last_mousey = parseInt(e.clientY-canvasy);
+            mousedown = true;
+            prevX=e.clientX;
+            prevY=e.clientY;
+
+        });
+
+        window.addEventListener("mousemove", function(e){
+
+
+            //console.log(`mUp: ${e.clientX},${e.clientY}`);
+            if (mousedown){
+
+                console.log(`mousemove: ${e.clientX},${e.clientY}`); 
+                var width=parseInt(e.clientX-prevX);
+                var height=parseInt(e.clientY-prevY);
+                const div = document.createElement("div");
+                div.style.borderColor="#845EFF80";
+                div.style.borderStyle="solid";
+                div.style.boxSizing='border-box';
+                div.style.position="absolute";   //moving div
+                div.style.left=`${prevX}px`; //moving div
+                div.style.top=`${prevY}px`;  //moving div
+                div.style.width=`${width}px`;
+                div.style.height=`${height}px`;
+                div.style.borderWidth='2px';
+                div.textContent="";
+                document.body.append(div);
+
+
+            }else{
+                //console.log(`mousenotDown: ${e.clientX},${e.clientY}`);
+            }
+
+        });
+
+        window.addEventListener("mouseup", function(e){
+            mousedown = false;
+            console.log(`mUp: ${e.clientX},${e.clientY}`);
+
+            var width=parseInt(e.clientX-prevX);
+            var height=parseInt(e.clientY-prevY);
+            console.log(`${prevX}-${prevY}-${width}-${height}`);
+
+            //----------------------------------------
+            const div = document.createElement("div");
+            div.style.borderColor="#FF0000FF";
+            div.style.borderStyle="solid";
+            div.style.boxSizing='border-box';
+            div.style.position="absolute";   //moving div
+            div.style.left=`${prevX}px`; //moving div
+            div.style.top=`${prevY}px`;  //moving div
+            div.style.width=`${width}px`;
+            div.style.height=`${height}px`;
+            div.style.borderWidth='2px';
+            div.textContent="";
+            document.body.append(div);
+
+        });
+
+
+    </script>
+</body>
+</html>
