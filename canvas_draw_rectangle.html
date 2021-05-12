@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cnvas Draw</title>
+</head>
+<body>
+    
+<canvas id="canvas" width="800" height="500" style="background-color:#FFFBF580;"></canvas>
+
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var canvasx = canvas.offsetLeft;
+    var canvasy = canvas.offsetTop;
+    var last_mousex = last_mousey = 0;
+    var mousex = mousey = 0;
+    var mousedown = false;
+
+    console.log(`${canvasx}-${canvasy}`);
+
+    canvas.addEventListener("mousedown", function(e){
+
+      console.log(`${e.clientX},${e.clientY}`);
+      last_mousex = parseInt(e.clientX-canvasx);
+	    last_mousey = parseInt(e.clientY-canvasy);
+      mousedown = true;
+      
+    });
+
+    canvas.addEventListener("mouseup", function(e){
+      mousedown = false;
+    });
+
+    canvas.addEventListener("mousemove", function(e){
+
+      mousex = parseInt(e.clientX-canvasx);
+	    mousey = parseInt(e.clientY-canvasy);
+
+        if(mousedown) {
+            ctx.clearRect(0,0,canvas.width,canvas.height); //clear canvas
+            ctx.beginPath();
+            var width = mousex-last_mousex;
+            var height = mousey-last_mousey;
+            ctx.rect(last_mousex,last_mousey,width,height);
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+    });
+</script>
+</body>
+</html>

@@ -13,7 +13,6 @@
 
   var mousedown = false;
   window.addEventListener("mousedown", mclick);
-
   window.addEventListener("mouseup", function(e){
 
    console.log('mouse up...');
@@ -36,23 +35,23 @@
   });
 
   function mclick(e){
-    
-    console.log(`${e.clientX},${e.clientY}`);
-    const div = document.createElement("div");
-    //div.setAttribute("id", "one");
-    div.style.borderColor="#FF0000FF";
-    div.style.borderStyle="solid";
-    div.style.boxSizing='border-box';
-    div.style.position="absolute";   //moving div
-    div.style.left=`${e.clientX}px`; //moving div
-    div.style.top=`${e.clientY}px`;  //moving div
-    div.style.width='100px';
-    div.style.height='100px';
-    div.style.borderWidth='2px';
-    //div.style.cursor="move"; //move crosshair grab
-    div.textContent="Hello";
-    document.body.append(div);
-    mousedown=true;
+      //mousedown event
+      console.log(`${e.clientX},${e.clientY}`);
+      const div = document.createElement("div");
+      //div.setAttribute("id", "one");
+      div.style.borderColor="#FF0000FF";
+      div.style.borderStyle="solid";
+      div.style.boxSizing='border-box';
+      div.style.position="absolute";   //moving div
+      div.style.left=`${e.clientX}px`; //moving div
+      div.style.top=`${e.clientY}px`;  //moving div
+      div.style.width='100px';
+      div.style.height='100px';
+      div.style.borderWidth='2px';
+      //div.style.cursor="move"; //move crosshair grab
+      div.textContent="Hello";
+      document.body.append(div);
+      mousedown=true;
 
   }
 
