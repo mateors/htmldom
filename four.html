@@ -13,7 +13,17 @@
 
         var mousedown=false;
         var prevX=0;
-        var prevY=0
+        var prevY=0;
+
+        function removeItem(tagName){
+            var itemCount = document.body.children.length;
+            for(var i=0; i<itemCount; i++){ //remove all item except last one
+                var item=document.body.children.item(i);
+                if(item.tagName==tagName.toUpperCase()) {
+                    document.body.removeChild(item)
+                }
+            }
+        }
 
         window.addEventListener("mousedown", function(e){
 
@@ -33,19 +43,20 @@
             //console.log(`mUp: ${e.clientX},${e.clientY}`);
             if (mousedown){
 
-                var itemCount = document.body.children.length;
-                console.log(itemCount);
-                for(var i=0; i<itemCount-1; i++){ //remove all item except last one
-                    var item=document.body.children.item(i);
-                    if(item.tagName=="DIV") {
-                        document.body.removeChild(item)
-                    }
-                }
-
+                // var itemCount = document.body.children.length;
+                // console.log(itemCount);
+                // for(var i=0; i<itemCount; i++){ //remove all item except last one
+                //     var item=document.body.children.item(i);
+                //     if(item.tagName=="DIV") {
+                //         document.body.removeChild(item)
+                //     }
+                // }
+                removeItem("DIV");
                 console.log(`mousemove: ${e.clientX},${e.clientY}`); 
                 var width=parseInt(e.clientX-prevX);
                 var height=parseInt(e.clientY-prevY);
                 const div = document.createElement("div");
+                div.setAttribute("title","mostain");
                 div.style.borderColor="#845EFF80";
                 div.style.borderStyle="solid";
                 div.style.boxSizing='border-box';
@@ -74,6 +85,7 @@
             console.log(`${prevX}-${prevY}-${width}-${height}`);
 
             //----------------------------------------
+            removeItem("DIV");
             const div = document.createElement("div");
             div.style.borderColor="#FF0000FF";
             div.style.borderStyle="solid";
@@ -86,6 +98,8 @@
             div.style.borderWidth='2px';
             div.textContent="";
             document.body.append(div);
+            var itemCount = document.body.children.length;
+            console.log(itemCount);
 
         });
 
