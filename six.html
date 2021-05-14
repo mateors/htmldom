@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six time</title>
+</head>
+<body>
+    
+
+    <script>
+
+        var mousedown=false;
+        var prevX=0;
+        var prevY=0;
+
+        function dynamicEvent() {
+            this.innerHTML = 'Dynamic event success.';
+            this.className += ' dynamic-success';
+            console.log("--> click");
+        }
+
+        function removeItem(tagName){
+            var itemCount = document.body.children.length;
+            for(var i=0; i<itemCount; i++){ //remove all item except last one
+                var item=document.body.children.item(i);
+                if(item.tagName==tagName.toUpperCase()) {
+                    document.body.removeChild(item)
+                }
+            }
+        }
+
+        window.addEventListener("mousedown", function(e){
+
+            
+            console.log(`mDown: ${e.clientX},${e.clientY},${e.offsetX},${e.type}`);
+            // last_mousex = parseInt(e.clientX-canvasx);
+            // last_mousey = parseInt(e.clientY-canvasy);
+            mousedown = true;
+            prevX=e.clientX;
+            prevY=e.clientY;
+
+        });
+
+        window.addEventListener("mousemove", function(e){
+
+
+            //console.log(`mUp: ${e.clientX},${e.clientY}`);
+            if (mousedown){
+
+                removeItem("DIV");
+                console.log(`mousemove: ${e.clientX},${e.clientY}`); 
+                var width=parseInt(e.clientX-prevX);
+                var height=parseInt(e.clientY-prevY);
+                const div = document.createElement("div");
+                div.setAttribute("title","mostain");
+                div.style.borderColor="#845EFF80";
+                div.style.borderStyle="solid";
+                div.style.boxSizing='border-box';
+                div.style.position="absolute";   //moving div
+                div.style.left=`${prevX}px`; //moving div
+                div.style.top=`${prevY}px`;  //moving div
+                div.style.width=`${width}px`;
+                div.style.height=`${height}px`;
+                div.style.borderWidth='2px';
+                div.textContent="";
+                document.body.append(div);
+
+
+            }else{
+                //console.log(`mousenotDown: ${e.clientX},${e.clientY}`);
+            }
+
+        });
+
+        window.addEventListener("mouseup", function(e){
+            mousedown = false;
+            console.log(`mUp: ${e.clientX},${e.clientY}`);
+
+            var width=parseInt(e.clientX-prevX);
+            var height=parseInt(e.clientY-prevY);
+            console.log(`${prevX}-${prevY}-${width}-${height}`);
+
+            //----------------------------------------
+            removeItem("DIV");
+            const divNode = document.createElement("div");
+            divNode.style.display="block";
+            divNode.style.borderColor="#FF0000FF";
+            divNode.style.borderStyle="solid";
+            divNode.style.boxSizing='border-box';
+            divNode.style.position="absolute";   //moving div
+            divNode.style.left=`${prevX}px`; //moving div
+            divNode.style.top=`${prevY}px`;  //moving div
+            divNode.style.width=`${width}px`;
+            divNode.style.height=`${height}px`;
+            divNode.style.borderWidth='2px';
+            divNode.textContent="";
+            document.body.append(divNode);
+
+            //child node
+            var left=prevX+0;
+            var top=prevY+0;
+            var cwidth=width-30;
+            var cheight=height-30;
+            const chilldNode = document.createElement("div");
+            chilldNode.style.borderColor="#4B3DFFBF";
+            chilldNode.style.borderStyle="solid";
+            chilldNode.style.boxSizing='border-box';
+            chilldNode.style.position="relative";   //moving div
+            chilldNode.style.padding="0px";
+            //chilldNode.style.paddingLeft="10px";
+            //chilldNode.style.left=`${left}px`; //moving div
+            //chilldNode.style.top=`${top}px`;  //moving div
+            chilldNode.style.marginTop="10px";
+            chilldNode.style.marginLeft="10px";
+            chilldNode.onmouseover = (e) => {  e.target.style.borderColor="green";     };
+            chilldNode.onmouseout  = (e) => {  e.target.style.borderColor="#4B3DFFBF"; };
+            chilldNode.onclick=dynamicEvent();
+            // chilldNode.style.marginRight="10px";
+            // chilldNode.style.marginBottom="10px";
+            //chilldNode.style.margin="0px";  
+            chilldNode.style.width=`${cwidth}px`;
+            chilldNode.style.height=`${cheight}px`;
+            chilldNode.style.borderWidth='2px';
+            chilldNode.textContent="C";
+
+
+            divNode.appendChild(chilldNode);
+            var itemCount = document.body.children.length;
+            console.log(divNode.getBoundingClientRect());
+
+        });
+
+
+    </script>
+</body>
+</html>
