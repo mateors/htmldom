@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container
+    {
+        width: 50%;
+        height: 70%;
+        background-color: rgb(230, 230, 230);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid transparent;
+        
+    }
+    .container:hover
+    {
+        border: 1px solid rgb(0, 101, 233);
+    }
+
+    .resizer
+    {
+        height: 10px;
+        width: 10px;
+        background-color: white;
+        position: absolute;
+        border: 1px solid transparent;
+        display: none;
+    }
+    .container:hover .resizer
+    {
+        display: block;
+        border: 1px solid rgb(0, 101, 233);
+    }
+    .north-resizer
+    {
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: n-resize;
+    }
+    .northeast-resizer
+    {
+        top: 0%;
+        right: 0%;
+        transform: translate(50%, -50%);
+        cursor: ne-resize;
+    }
+    .east-resizer 
+    {
+        top: 50%;
+        right: 0%;
+        transform: translate(50%, -50%);
+        cursor: e-resize;
+    }
+    .southeast-resizer
+    {
+        bottom: 0%;
+        right: 0%;
+        transform: translate(50%, 50%);
+        cursor: se-resize;
+    }
+    .south-resizer
+    {
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        cursor: s-resize;
+    }
+    .southwest-resizer
+    {
+        bottom: 0%;
+        left: 0%;
+        transform: translate(-50%, 50%);
+        cursor: sw-resize;
+    }
+    .west-resizer
+    {
+        top: 50%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        cursor: w-resize;
+    }
+    .northwest-resizer
+    {
+        top: 0%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        cursor: nw-resize;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="resizer north-resizer"></div>
+        <div class="resizer northeast-resizer"></div>
+        <div class="resizer east-resizer"></div>
+        <div class="resizer southeast-resizer"></div>
+        <div class="resizer south-resizer"></div>
+        <div class="resizer southwest-resizer"></div>
+        <div class="resizer west-resizer"></div>
+        <div class="resizer northwest-resizer"></div>
+
+    </div>
+</body>
+</html>
