@@ -5,6 +5,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Six time</title>
+    <style>
+
+    .container
+    {
+        border: 1px solid red;
+        
+    }
+    .container:hover
+    {
+        border: 1px solid rgb(0, 101, 233);
+    }
+
+    .resizer
+    {
+        height: 10px;
+        width: 10px;
+        background-color: white;
+        position: absolute;
+        border: 1px solid transparent;
+        display: none;
+    }
+    .container:hover .resizer
+    {
+        display: block;
+        border: 1px solid rgb(0, 101, 233);
+    } 
+    .north-resizer
+    {
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: n-resize;
+    }
+    .northeast-resizer
+    {
+        top: 0%;
+        right: 0%;
+        transform: translate(50%, -50%);
+        cursor: ne-resize;
+    }
+    .east-resizer 
+    {
+        top: 50%;
+        right: 0%;
+        transform: translate(50%, -50%);
+        cursor: e-resize;
+    }
+    .southeast-resizer
+    {
+        bottom: 0%;
+        right: 0%;
+        transform: translate(50%, 50%);
+        cursor: se-resize;
+    }
+    .south-resizer
+    {
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        cursor: s-resize;
+    }
+    .southwest-resizer
+    {
+        bottom: 0%;
+        left: 0%;
+        transform: translate(-50%, 50%);
+        cursor: sw-resize;
+    }
+    .west-resizer
+    {
+        top: 50%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        cursor: w-resize;
+    }
+    .northwest-resizer
+    {
+        top: 0%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        cursor: nw-resize;
+    }
+    </style>
 </head>
 <body>
     
@@ -50,7 +133,7 @@
             if (mousedown){
 
                 removeItem("DIV");
-                console.log(`mousemove: ${e.clientX},${e.clientY}`); 
+                //console.log(`mousemove: ${e.clientX},${e.clientY}`); 
                 var width=parseInt(e.clientX-prevX);
                 var height=parseInt(e.clientY-prevY);
                 const div = document.createElement("div");
@@ -85,50 +168,94 @@
             //----------------------------------------
             removeItem("DIV");
             const divNode = document.createElement("div");
-            divNode.style.display="block";
-            divNode.style.borderColor="#FF0000FF";
-            divNode.style.borderStyle="solid";
+            //divNode.style.display="block";
+            divNode.setAttribute("class", "container");
+            //divNode.style.borderColor="red";//#0065E9
+            //divNode.style.borderStyle="solid";
             divNode.style.boxSizing='border-box';
             divNode.style.position="absolute";   //moving div
             divNode.style.left=`${prevX}px`; //moving div
             divNode.style.top=`${prevY}px`;  //moving div
             divNode.style.width=`${width}px`;
             divNode.style.height=`${height}px`;
-            divNode.style.borderWidth='2px';
+            //divNode.style.borderWidth='1px';
+            //divNode.onmouseover = (e) => {  
+            //        e.target.style.borderColor="#0065E9";
+            //     };
+            //border: 1px solid rgb(0, 101, 233);
             divNode.textContent="";
             document.body.append(divNode);
 
             //child node
-            var left=prevX+0;
-            var top=prevY+0;
-            var cwidth=width-30;
-            var cheight=height-30;
-            const chilldNode = document.createElement("div");
-            chilldNode.style.borderColor="#4B3DFFBF";
-            chilldNode.style.borderStyle="solid";
-            chilldNode.style.boxSizing='border-box';
-            chilldNode.style.position="relative";   //moving div
-            chilldNode.style.padding="0px";
-            //chilldNode.style.paddingLeft="10px";
-            //chilldNode.style.left=`${left}px`; //moving div
-            //chilldNode.style.top=`${top}px`;  //moving div
-            chilldNode.style.marginTop="10px";
-            chilldNode.style.marginLeft="10px";
-            chilldNode.onmouseover = (e) => {  e.target.style.borderColor="green";     };
-            chilldNode.onmouseout  = (e) => {  e.target.style.borderColor="#4B3DFFBF"; };
-            chilldNode.onclick=dynamicEvent();
-            // chilldNode.style.marginRight="10px";
-            // chilldNode.style.marginBottom="10px";
-            //chilldNode.style.margin="0px";  
-            chilldNode.style.width=`${cwidth}px`;
-            chilldNode.style.height=`${cheight}px`;
-            chilldNode.style.borderWidth='2px';
-            chilldNode.textContent="C";
+            // var left=prevX+0;
+            // var top=prevY+0;
+            // var cwidth=width-30;
+            // var cheight=height-30;
+            const chilldNodeTM = document.createElement("div");
+            chilldNodeTM.setAttribute("class", "resizer north-resizer");//top-middle
+            divNode.appendChild(chilldNodeTM);
+
+            const chilldNodeTR = document.createElement("div");
+            chilldNodeTR.setAttribute("class", "resizer northeast-resizer");//top-right
+            divNode.appendChild(chilldNodeTR);
+
+            const chilldNodeRM = document.createElement("div");
+            chilldNodeRM.setAttribute("class", "resizer east-resizer");//right-middle
+            divNode.appendChild(chilldNodeRM);
+
+            const chilldNodeBR = document.createElement("div");
+            chilldNodeBR.setAttribute("class", "resizer southeast-resizer");//bottom-right
+            divNode.appendChild(chilldNodeBR);
+
+            const chilldNodeBM = document.createElement("div");
+            chilldNodeBM.setAttribute("class", "resizer south-resizer");//bottom-middle
+            divNode.appendChild(chilldNodeBM);
+
+            const chilldNodeBL = document.createElement("div");
+            chilldNodeBL.setAttribute("class", "resizer southwest-resizer");//bottom-left
+            divNode.appendChild(chilldNodeBL);
+
+            const chilldNodeLM = document.createElement("div");
+            chilldNodeLM.setAttribute("class", "resizer west-resizer");//left-middle
+            divNode.appendChild(chilldNodeLM);
+
+            const chilldNodeTL = document.createElement("div");
+            chilldNodeTL.setAttribute("class", "resizer northwest-resizer");//top-left
+            divNode.appendChild(chilldNodeTL);
+
+            
+            
+            //chilldNode.style.borderColor="#4B3DFFBF";
+            //chilldNode.style.borderStyle="solid";
+            //chilldNode.style.boxSizing='border-box';
+            //chilldNode.style.position="relative";   //moving div
+            //chilldNode.style.padding="0px";
+            //chilldNode.style.marginTop="10px";
+            //chilldNode.style.marginLeft="10px";
+            //chilldNode.onmouseover = (e) => {  e.target.style.borderColor="green";     };
+            //chilldNode.onmouseout  = (e) => {  e.target.style.borderColor="#4B3DFFBF"; };
+            //chilldNode.onclick=dynamicEvent();
+            //chilldNode.style.width=`${cwidth}px`;
+            //chilldNode.style.height=`${cheight}px`;
+            //chilldNode.style.borderWidth='2px';
+            //chilldNode.textContent="C";
 
 
-            divNode.appendChild(chilldNode);
-            var itemCount = document.body.children.length;
-            console.log(divNode.getBoundingClientRect());
+            //divNode.appendChild(chilldNode);
+            //var itemCount = document.body.children.length;
+            //console.log(divNode.getBoundingClientRect());
+
+            //var rez=document.getElementsByTagName("style");
+            //console.log(rez[0].firstChild.data);
+            //console.log(rez);
+            //document.getElementsByClassName("resizer").style.display= "";
+
+            //let myElements = document.querySelectorAll(".resizer");
+            //for (let i = 0; i < myElements.length; i++) {
+                //myElements[i].style.opacity = 0;
+                //console.log(myElements[i].style.display="block");
+            //}
+
 
         });
 
