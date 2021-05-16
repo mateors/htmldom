@@ -15,6 +15,7 @@
     .container:hover
     {
         border: 1px solid rgb(0, 101, 233);
+        cursor: move;
     }
 
     .resizer
@@ -94,9 +95,20 @@
 
     <script>
 
+        let isResizing = false;
         var mousedown=false;
         var prevX=0;
         var prevY=0;
+
+        // var el = document.querySelector(".container");
+        // var pseudo = window.getComputedStyle(el, ':hover');
+        // console.log(pseudo);
+
+        document.addEventListener('mouseover',function(e){
+            //var cursor = e.target.style.cursor;
+            var pseudo = window.getComputedStyle(e.target, ":hover");
+            console.log(pseudo);
+        },false);
 
         function dynamicEvent() {
             this.innerHTML = 'Dynamic event success.';
@@ -126,11 +138,24 @@
 
         });
 
+        // document.addEventListener("mouseover", function(e){
+
+        //     console.log(e.target);
+
+        // });
+
         window.addEventListener("mousemove", function(e){
 
 
             //console.log(`mUp: ${e.clientX},${e.clientY}`);
-            if (mousedown){
+            var cursor=e.target.style.cursor || "Not defined";
+            //console.log(e);//getAttribute("cursor")
+            // e.target.addEventListener("mouseover",function(e){
+            //     console.log(e.target);
+
+            // });
+
+            if (mousedown && isResizing==false){
 
                 removeItem("DIV");
                 //console.log(`mousemove: ${e.clientX},${e.clientY}`); 
@@ -151,6 +176,10 @@
                 document.body.append(div);
 
 
+            }else if(mousedown && isResizing){
+
+                    console.log('move....');
+
             }else{
                 //console.log(`mousenotDown: ${e.clientX},${e.clientY}`);
             }
@@ -170,6 +199,7 @@
             const divNode = document.createElement("div");
             //divNode.style.display="block";
             divNode.setAttribute("class", "container");
+            //divNode.getAttribute()
             //divNode.style.borderColor="red";//#0065E9
             //divNode.style.borderStyle="solid";
             divNode.style.boxSizing='border-box';
