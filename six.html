@@ -100,14 +100,19 @@
         var prevX=0;
         var prevY=0;
 
-        // var el = document.querySelector(".container");
-        // var pseudo = window.getComputedStyle(el, ':hover');
-        // console.log(pseudo);
 
         document.addEventListener('mouseover',function(e){
-            //var cursor = e.target.style.cursor;
+            var cursor = e.target.style.cursor;
+            var className=e.target.className;
+            var classList=e.target.classList;
+            if (classList.contains("southeast-resizer")){
+                console.log("bottom right corner");
+            }
+
+            console.log(classList);
             var pseudo = window.getComputedStyle(e.target, ":hover");
-            console.log(pseudo);
+            console.log(pseudo.cursor);
+
         },false);
 
         function dynamicEvent() {
@@ -149,7 +154,7 @@
 
             //console.log(`mUp: ${e.clientX},${e.clientY}`);
             var cursor=e.target.style.cursor || "Not defined";
-            //console.log(e);//getAttribute("cursor")
+            //console.log(e.target.style);//getAttribute("cursor")
             // e.target.addEventListener("mouseover",function(e){
             //     console.log(e.target);
 
@@ -285,7 +290,9 @@
                 //myElements[i].style.opacity = 0;
                 //console.log(myElements[i].style.display="block");
             //}
-
+            var contn = document.querySelector(".container");
+            var result = window.getComputedStyle(contn, ':hover');
+            console.log(result.cursor);
 
         });
 
