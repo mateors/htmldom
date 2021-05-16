@@ -102,7 +102,7 @@
 
 
         document.addEventListener('mouseover',function(e){
-            var cursor = e.target.style.cursor;
+            
             var className=e.target.className;
             var classList=e.target.classList;
             if (classList.contains("southeast-resizer")){
@@ -112,6 +112,7 @@
             console.log(classList);
             var pseudo = window.getComputedStyle(e.target, ":hover");
             console.log(pseudo.cursor);
+            console.log(e.target.class);
 
         },false);
 
