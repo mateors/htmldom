@@ -114,7 +114,9 @@
             console.log(pseudo.cursor);
             console.log(e.target.class);
 
-        },false);
+        }, false);
+        //https://www.w3.org/TR/DOM-Level-3-Events/#event-flow
+        //https://stackoverflow.com/questions/17564323/what-does-the-third-parameter-false-indicate-in-document-addeventlistenerdev
 
         function dynamicEvent() {
             this.innerHTML = 'Dynamic event success.';
@@ -193,6 +195,7 @@
         });
 
         window.addEventListener("mouseup", function(e){
+            
             mousedown = false;
             console.log(`mUp: ${e.clientX},${e.clientY}`);
 
