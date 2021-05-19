@@ -175,6 +175,53 @@
 
                 function mouseup(e){
 
+                    var width=parseInt(e.clientX-prevX);
+                    var height=parseInt(e.clientY-prevY);
+
+                    removeItem("DIV");
+                    const divNode = document.createElement("div");
+                    divNode.setAttribute("class", "container");
+                    divNode.style.boxSizing='border-box';
+                    divNode.style.position="absolute";   //moving div
+                    divNode.style.left=`${prevX}px`; //moving div
+                    divNode.style.top=`${prevY}px`;  //moving div
+                    divNode.style.width=`${width}px`;
+                    divNode.style.height=`${height}px`;
+                    divNode.textContent="";
+                    document.body.append(divNode);
+
+                    const chilldNodeTM = document.createElement("div");
+                    chilldNodeTM.setAttribute("class", "resizer north-resizer");//top-middle
+                    divNode.appendChild(chilldNodeTM);
+
+                    const chilldNodeTR = document.createElement("div");
+                    chilldNodeTR.setAttribute("class", "resizer northeast-resizer");//top-right
+                    divNode.appendChild(chilldNodeTR);
+
+                    const chilldNodeRM = document.createElement("div");
+                    chilldNodeRM.setAttribute("class", "resizer east-resizer");//right-middle
+                    divNode.appendChild(chilldNodeRM);
+
+                    const chilldNodeBR = document.createElement("div");
+                    chilldNodeBR.setAttribute("class", "resizer southeast-resizer");//bottom-right
+                    divNode.appendChild(chilldNodeBR);
+
+                    const chilldNodeBM = document.createElement("div");
+                    chilldNodeBM.setAttribute("class", "resizer south-resizer");//bottom-middle
+                    divNode.appendChild(chilldNodeBM);
+
+                    const chilldNodeBL = document.createElement("div");
+                    chilldNodeBL.setAttribute("class", "resizer southwest-resizer");//bottom-left
+                    divNode.appendChild(chilldNodeBL);
+
+                    const chilldNodeLM = document.createElement("div");
+                    chilldNodeLM.setAttribute("class", "resizer west-resizer");//left-middle
+                    divNode.appendChild(chilldNodeLM);
+
+                    const chilldNodeTL = document.createElement("div");
+                    chilldNodeTL.setAttribute("class", "resizer northwest-resizer");//top-left
+                    divNode.appendChild(chilldNodeTL);
+
                     mAction="";
                     element.removeEventListener("mousedown", mousedown);
                     element.removeEventListener("mouseup", mouseup);
