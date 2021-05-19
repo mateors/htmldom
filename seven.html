@@ -112,82 +112,75 @@
 
     <script>
 
+        function removeItem(tagName){
+                    //var itemCount = document.body.children.length;
+                    var parent=document.body.children[0];//div.maincanvas
+                    var itemCount = document.body.children[0].childNodes.length;
+                    //console.log(itemCount);
+                    
+                    //console.log(document.getElementsByClassName("maincanvas"));
+                    for(var i=0; i<itemCount; i++){ //remove all item except last one
+                        //var item=document.body.children.item(i);
+                        var item = document.body.children[0].childNodes[i];
+                            //document.body.removeChild(item);
+                            parent.removeChild(item);
+                        
+                    }
+        }
+
         const mainCanvas = document.querySelector(".maincanvas");
         let isResizing = false;
-        var mousedown=false;
-        console.log(`${window.innerWidth}x${window.innerHeight}`);
-        //console.log(window);
+        let mAction = "draw";
 
-        // window.onresize= function(e){
-        //     console.log(e);
+        mainCanvas.addEventListener("mousedown", mousedown);
 
-        // };
+        function mousedown(e){
 
-// Listen for the page to be finished loading
-window.addEventListener("load", () => {
-  //hasNetwork(navigator.onLine);
-  console.log(navigator.onLine);
+                var element=e.target;
+                //console.log(element);
+                let prevX=e.clientX;
+                let prevY=e.clientY;
 
-  window.addEventListener("online", () => {
-    // Set hasNetwork to online when they change to online.
-    //hasNetwork(true);
-    console.log("online");
-  });
+                element.addEventListener("mousemove", mousemove);
+                element.addEventListener("mouseup", mouseup);
 
-  window.addEventListener("offline", () => {
-    // Set hasNetwork to offline when they change to offline.
-    //hasNetwork(false);
-    console.log("offline");
-  });
+                function mousemove(e){
+                    console.log(`${e.clientX},${e.clientY},${e.offsetX}`);
 
-});
+                    if(mAction=="draw"){
 
-        window.addEventListener("resize", function(e){
-            console.log(e.target);
-        });
+                        //console.log(document.body.children);
+                        removeItem("DIV");
+                        var width=parseInt(e.clientX-prevX);
+                        var height=parseInt(e.clientY-prevY);
+                        const div = document.createElement("div");
+                        div.setAttribute("title","mostain");
+                        div.style.borderColor="#845EFF80";
+                        div.style.borderStyle="solid";
+                        div.style.boxSizing='border-box';
+                        div.style.position="absolute";   //moving div
+                        div.style.left=`${prevX}px`; //moving div
+                        div.style.top=`${prevY}px`;  //moving div
+                        div.style.width=`${width}px`;
+                        div.style.height=`${height}px`;
+                        div.style.borderWidth='2px';
+                        div.textContent="C";
+                        //document.body.append(div);
+                        mainCanvas.appendChild(div);
 
-        window.addEventListener('online', () => console.log('Became online'));
-        window.addEventListener('offline', () => console.log('Became offline'));
+                    }
 
-        window.addEventListener("offline", function(e){
-
-            console.log('offline');
-            console.log(e);
-            console.log(navigator.onLine);
-            //console.log(navigator.onLine);
-
-        });
-            
-        window.onpopstate = function(event) {
-            //alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
-            console.log(event.type);
-        };
-
-        var prevX=0;
-        var prevY=0;
-
-        mainCanvas.addEventListener("mousedown", function(e){
+                }
 
 
-            var element=e.target;
-            console.log(element);
+                function mouseup(e){
 
-            window.addEventListener("mousemove", mousemove);
-            window.addEventListener("mouseup", mouseup);
+                    mAction="";
+                    element.removeEventListener("mousedown", mousedown);
+                    element.removeEventListener("mouseup", mouseup);
+                }
 
-            function mousemove(e){
-                console.log(`${e.clientX},${e.clientY},${e.offsetX}`);
-            }
-
-
-            function mouseup(e){
-
-                window.removeEventListener("mousedown", false);
-
-            }
-
-
-        });
+        }
 
     </script>
 </body>
