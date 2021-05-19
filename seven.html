@@ -112,6 +112,61 @@
 
     <script>
 
+function isElement(element) {
+    return element instanceof Element || element instanceof HTMLDocument;  
+}
+
+        //object.addEventListener("mouseover", myScript);
+
+        window.addEventListener("mouseover", function(e){
+
+            let element=e.target;
+            //console.log(e.target.className);
+            var className=element.className;
+            
+            //var contn = document.querySelector(".container");
+            var cssvals = window.getComputedStyle(element, ':hover');
+           
+
+            if (cssvals.cursor=="move"){
+
+                element.addEventListener("mousedown", HoverMousedown);
+                element.addEventListener("mouseup", HoverMouseup);
+                
+                let prevX = 0;
+                let prevY = 0;
+
+                function HoverMousedown(e){
+                    //console.log('hover mousedown..');
+                    prevX = e.clientX;
+                    prevY = e.clientY;
+
+                }
+
+                function HoverMouseup(e){
+
+                        let newX = prevX - e.clientX;
+                        let newY = prevY - e.clientY;
+
+                        const rect = element.getBoundingClientRect();
+                        element.style.left = rect.left - newX + "px";
+                        element.style.top = rect.top - newY + "px";
+                        //console.log(`${e.clientX},${e.clientY}-${element.style.top}`);
+                        //prevX = e.clientX;
+                        //prevY = e.clientY;
+
+                        //console.log('hover mouseup...');
+                        element.removeEventListener("mousedown", HoverMousedown);
+                        element.removeEventListener("mouseup", HoverMouseup);
+                }
+
+
+            }
+
+
+        });
+        
+
         function removeItem(tagName){
                     //var itemCount = document.body.children.length;
                     var parent=document.body.children[0];//div.maincanvas
@@ -145,8 +200,8 @@
                 element.addEventListener("mouseup", mouseup);
 
                 function mousemove(e){
-                    console.log(`${e.clientX},${e.clientY},${e.offsetX}`);
 
+                    //console.log(`${e.clientX},${e.clientY},${e.offsetX}`);
                     if(mAction=="draw"){
 
                         //console.log(document.body.children);
@@ -180,6 +235,7 @@
 
                     removeItem("DIV");
                     const divNode = document.createElement("div");
+                    //console.log(isElement(divNode));
                     divNode.setAttribute("class", "container");
                     divNode.style.boxSizing='border-box';
                     divNode.style.position="absolute";   //moving div
@@ -188,7 +244,8 @@
                     divNode.style.width=`${width}px`;
                     divNode.style.height=`${height}px`;
                     divNode.textContent="";
-                    document.body.append(divNode);
+                    mainCanvas.appendChild(divNode);
+                    //document.body.append(divNode);
 
                     const chilldNodeTM = document.createElement("div");
                     chilldNodeTM.setAttribute("class", "resizer north-resizer");//top-middle
@@ -225,6 +282,8 @@
                     mAction="";
                     element.removeEventListener("mousedown", mousedown);
                     element.removeEventListener("mouseup", mouseup);
+
+                    //console.log(document.body.children[0]);
                 }
 
         }
