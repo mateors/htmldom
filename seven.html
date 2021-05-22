@@ -121,17 +121,22 @@ function isElement(element) {
         window.addEventListener("mouseover", function(e){
 
             let element=e.target;
+            //const element = document.querySelector(".container");
             //console.log(e.target.className);
-            var className=element.className;
+            //var className=element.className;
             
             //var contn = document.querySelector(".container");
             var cssvals = window.getComputedStyle(element, ':hover');
+
+            console.log(`>(${e.offsetX},${e.offsetY})*${e.clientX}`);
            
 
             if (cssvals.cursor=="move"){
 
                 element.addEventListener("mousedown", HoverMousedown);
+                element.addEventListener("mousemove", HoverMouseMove);
                 element.addEventListener("mouseup", HoverMouseup);
+
                 
                 let prevX = 0;
                 let prevY = 0;
@@ -143,6 +148,12 @@ function isElement(element) {
 
                 }
 
+                function HoverMouseMove(e){
+
+                    console.log(`(${e.clientX},${e.clientY})-(${element.style.top},${element.style.top})-(${e.offsetX},${e.offsetY})`);
+
+                }
+
                 function HoverMouseup(e){
 
                         let newX = prevX - e.clientX;
@@ -151,7 +162,7 @@ function isElement(element) {
                         const rect = element.getBoundingClientRect();
                         element.style.left = rect.left - newX + "px";
                         element.style.top = rect.top - newY + "px";
-                        //console.log(`${e.clientX},${e.clientY}-${element.style.top}`);
+                        console.log(`${e.clientX},${e.clientY}-${element.style.top},${e.offsetX}`);
                         //prevX = e.clientX;
                         //prevY = e.clientY;
 
@@ -278,6 +289,8 @@ function isElement(element) {
                     const chilldNodeTL = document.createElement("div");
                     chilldNodeTL.setAttribute("class", "resizer northwest-resizer");//top-left
                     divNode.appendChild(chilldNodeTL);
+
+                    console.log(`(${e.clientX},${e.clientY})-(${element.style.top},${element.style.left})-(${e.offsetX},${e.offsetY})`);
 
                     mAction="";
                     element.removeEventListener("mousedown", mousedown);
