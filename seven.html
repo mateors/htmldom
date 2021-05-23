@@ -112,9 +112,9 @@
 
     <script>
 
-function isElement(element) {
-    return element instanceof Element || element instanceof HTMLDocument;  
-}
+        function isElement(element) {
+            return element instanceof Element || element instanceof HTMLDocument;  
+        }
 
         //object.addEventListener("mouseover", myScript);
 
@@ -150,7 +150,9 @@ function isElement(element) {
 
                 function HoverMouseMove(e){
 
-                    console.log(`(${e.clientX},${e.clientY})-(${element.style.top},${element.style.top})-(${e.offsetX},${e.offsetY})`);
+                    let rect=e.target.getBoundingClientRect();
+                    console.log(rect);
+                    console.log(`${rect.top},(${e.clientX},${e.clientY})-(${element.style.left},${element.style.top})-(${e.offsetX},${e.offsetY})`);
 
                 }
 

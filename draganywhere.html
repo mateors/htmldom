@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drage using Mousemove</title>
+</head>
+<body>
+
+
+    <script>
+
+        function removeItem(tagName){
+            var itemCount = document.body.children.length;
+            for(var i=0; i<itemCount; i++){ //remove all item except last one
+                var item=document.body.children.item(i);
+                if(item.tagName==tagName.toUpperCase()) {
+                    document.body.removeChild(item)
+                }
+            }
+        }
+
+        var prevX=0;
+        var prevY=0;
+        var mouseDown=false;
+
+        window.addEventListener("mousedown", mousedown);
+        window.addEventListener("mousemove", mousemove);
+        window.addEventListener("mouseup", mouseup);
+
+        function mousedown(e){
+
+            prevX=e.clientX;
+            prevY=e.clientY;
+            mouseDown=true;
+
+
+        }
+
+        function mousemove(e){
+
+            if (mouseDown){
+                removeItem("div");
+                var width=parseInt(e.clientX-prevX);
+                var height=parseInt(e.clientY-prevY);
+                const div = document.createElement("div");
+                div.setAttribute("title","mostain");
+                div.style.borderColor="#845EFF80";
+                div.style.borderStyle="solid";
+                div.style.boxSizing='border-box';
+                div.style.position="absolute";   //moving div
+                div.style.left=`${prevX}px`; //moving div
+                div.style.top=`${prevY}px`;  //moving div
+                div.style.width=`${width}px`;
+                div.style.height=`${height}px`;
+                div.style.borderWidth='2px';
+                div.textContent="";
+                document.body.append(div);
+
+            }else{
+
+                let newX=prevX-e.clientX;
+                let newY=prevY-e.clientY;
+                //console.log(e.target.getBoundingClientRect());
+                let rect=e.target.getBoundingClientRect();
+
+                e.target.style.left=rect.left-newX+"px";
+                e.target.style.top=rect.top-newY+"px";
+
+                prevX=e.clientX;
+                prevY=e.clientY;
+            }
+        }
+
+
+        function mouseup(e){
+
+            mouseDown=false;
+            window.removeEventListener("mousedown", mousedown);
+            window.removeEventListener("mouseup", mouseup);
+
+        }
+
+
+    </script>
+    
+</body>
+</html>
