@@ -115,34 +115,56 @@
             return element instanceof Element || element instanceof HTMLDocument;  
         }
 
+        function removeClass(element){
+            //console.log(isElement(element));
+            if(isElement(element)){
+                element.classList.remove("selected");
+                return true;
+            }
+            return false
+        }
+
         function isHTMLCollection(collectionElement){
             //An HTMLCollection object is an array-like list of HTML elements.
             return HTMLCollection.prototype.isPrototypeOf(collectionElement);
         }
 
         let divContainer=document.querySelector(".container");
+        let isSelected=false;
 
         divContainer.addEventListener("click", function(e){
-            console.log(e.target.classList);
+            //console.log(e.target.classList);
+            //console.log('click1');
             e.target.classList.add("selected");
+            isSelected=true;
         });
 
-        window.addEventListener("click", function(e){
+        //console.log(document.activeElement.localName);//document.activeElement localName
+        document.addEventListener("click", function(e){
 
-            let body=window.document.body;
-            console.log(body.childNodes);
-            console.log(body.children);
+            //console.log(e.target.childNodes);//nodeName localName NodeList(3) [head, text, body]
+            if(e.target.childNodes.length==3)
+            {
+                let body=window.document.body;
+                //console.log(body.childNodes);
+                //console.log(body.children);
 
-            //let isHtmlCollection = HTMLCollection.prototype.isPrototypeOf(body.children);
-            console.log(isHTMLCollection(body));
-            console.log(body.nodeType); //nodeType==1
+                //let isHtmlCollection = HTMLCollection.prototype.isPrototypeOf(body.children);
+                //console.log(isHTMLCollection(body));
+                //console.log(body.nodeType); //nodeType==1
 
-            //HTMLCollection
-            for(let i=0;i<body.children.length;i++){
-                //console.log(body.children[i].nodeName); //each child element
-                let node=body.children[i].nodeName;
-                console.log(body.children[i].nodeName);
-                if (node=="DIV"){
+                //HTMLCollection
+                for(let i=0;i<body.children.length;i++){
+                    //console.log(body.children[i].nodeName); //each child element
+                    let node=body.children[i].nodeName;
+                    
+                    if (node=="DIV" && isSelected==true){
+
+                        let selected = body.children[i].classList.contains("selected");
+                        if(selected){
+                            removeClass(body.children[i]);
+                        }
+                    }
 
                 }
 
