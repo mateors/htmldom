@@ -17,12 +17,12 @@
             left: 20px;
         }
 
-        .active{
+        .selected{
             border: 1px solid rgb(0, 101, 233);
             cursor: move;
         }
 
-        .active .resizer{
+        .selected .resizer{
             display: block;
             border: 1px solid rgb(0, 101, 233);
         }    
@@ -97,7 +97,7 @@
 </head>
 <body>
     
-    <div class="container active">
+    <div class="container selected">
         <div class="resizer north-resizer"></div>
         <div class="resizer northeast-resizer"></div>
         <div class="resizer east-resizer"></div>
