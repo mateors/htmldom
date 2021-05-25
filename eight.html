@@ -111,12 +111,43 @@
 
     <script>
 
+        function isElement(element) {
+            return element instanceof Element || element instanceof HTMLDocument;  
+        }
+
+        function isHTMLCollection(collectionElement){
+            //An HTMLCollection object is an array-like list of HTML elements.
+            return HTMLCollection.prototype.isPrototypeOf(collectionElement);
+        }
+
         let divContainer=document.querySelector(".container");
 
         divContainer.addEventListener("click", function(e){
             console.log(e.target.classList);
             e.target.classList.add("selected");
         });
+
+        window.addEventListener("click", function(e){
+
+            let body=window.document.body;
+            console.log(body.childNodes);
+            console.log(body.children);
+
+            //let isHtmlCollection = HTMLCollection.prototype.isPrototypeOf(body.children);
+            console.log(isHTMLCollection(body));
+            console.log(body.nodeType); //nodeType==1
+
+            //HTMLCollection
+            for(let i=0;i<body.children.length;i++){
+                //console.log(body.children[i].nodeName); //each child element
+                let node=body.children[i].nodeName;
+                console.log(body.children[i].nodeName);
+                if (node=="DIV"){
+
+                }
+
+            }
+        })
 
     </script>
     
