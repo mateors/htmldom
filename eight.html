@@ -169,7 +169,65 @@
                 }
 
             }
-        })
+        });
+
+        let prevX = 0;
+        let prevY = 0;
+        let mouseDown=false;
+
+        document.addEventListener("mousedown", mousedown);
+        document.addEventListener("mousemove", mousemove);
+        document.addEventListener("mouseup", mouseup);
+
+        function mousedown(e){
+
+            mouseDown=true;
+            // let element=e.target;
+            // var cssvals = window.getComputedStyle(element, ':hover');
+            // console.log('md>'+cssvals.cursor);            
+
+            prevX = e.clientX;
+            prevY = e.clientY;
+
+            let rect=e.target.getBoundingClientRect();
+            console.log(rect);
+            console.log(e.offsetX);
+            
+            console.log('mousedown..'+e.clientX);
+
+        }
+
+        function mousemove(e){
+
+            let element=e.target;
+            var cssvals = window.getComputedStyle(element, ':hover');
+            let cursorValue = cssvals.cursor;
+            console.log(cssvals.cursor);
+
+            if (mouseDown==true && cursorValue=="move"){
+
+                let newX = prevX - e.clientX;
+                let newY = prevY - e.clientY;
+    
+                let rect=e.target.getBoundingClientRect();
+    
+                divContainer.style.left = rect.left - newX + "px";
+                divContainer.style.top = rect.top - newY + "px";
+    
+                prevX = e.clientX;
+                prevY = e.clientY;
+            }
+
+
+        }
+
+        function mouseup(e){
+
+            mouseDown=false;
+            window.removeEventListener("mousedown", mousedown);
+            window.removeEventListener("mouseup", mouseup);
+
+        }
 
     </script>
     
