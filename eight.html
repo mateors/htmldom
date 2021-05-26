@@ -212,6 +212,9 @@
                 let newY = prevY - e.clientY;
     
                 let rect=e.target.getBoundingClientRect();
+                var w = window.innerWidth;
+                var h = window.innerHeight;
+                console.log(`Visual Viewport: ${w}x${h}`);
                 
                 if(rect.left - newX>0 && rect.top - newY>0){
 
