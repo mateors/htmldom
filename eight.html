@@ -202,20 +202,43 @@
             let element=e.target;
             var cssvals = window.getComputedStyle(element, ':hover');
             let cursorValue = cssvals.cursor;
-            console.log(cssvals.cursor);
+            
 
             if (mouseDown==true && cursorValue=="move"){
+
+                //console.log(cssvals.cursor);
 
                 let newX = prevX - e.clientX;
                 let newY = prevY - e.clientY;
     
                 let rect=e.target.getBoundingClientRect();
+                
+                if(rect.left - newX>0 && rect.top - newY>0){
+
+                    divContainer.style.left = rect.left - newX + "px";
+                    divContainer.style.top = rect.top - newY + "px";
+
+                    //console.log(divContainer.style.left);${window.pageYOffset},
+                    //console.log(`${e.pageX},${e.pageY},${window.screenY}`);
+
+                    prevX = e.clientX;
+                    prevY = e.clientY;
+                }
+
+
+
+                // if (rect.left < 0){
     
-                divContainer.style.left = rect.left - newX + "px";
-                divContainer.style.top = rect.top - newY + "px";
-    
-                prevX = e.clientX;
-                prevY = e.clientY;
+                //     divContainer.style.left = rect.left - newX + "px";
+                //     divContainer.style.top = rect.top - newY + "px";
+                //     prevX = e.clientX;
+                //     prevY = e.clientY;
+                // }else{
+                //     prevX=0;
+                //     prevY=0;
+                // }
+
+
             }
 
 
