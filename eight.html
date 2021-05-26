@@ -191,9 +191,9 @@
 
             let rect=e.target.getBoundingClientRect();
             console.log(rect);
-            console.log(e.offsetX);
+            console.log(window.innerHeight);
             
-            console.log('mousedown..'+e.clientX);
+            console.log('mousedown..'+e.clientY);
 
         }
 
@@ -213,10 +213,12 @@
     
                 let rect=e.target.getBoundingClientRect();
                 var w = window.innerWidth;
-                var h = window.innerHeight;
-                console.log(`Visual Viewport: ${w}x${h}`);
+                var h = window.innerHeight; //-rect.top
+                //let rightBound=rect.left+rect.width;
+                //console.log(`Visual Viewport: ${w}x${h} == ${w} >= ${rect.right}`);
+                console.log(`Visual Viewport: ${w}x${h} == ${h} >= ${rect.bottom}`);
                 
-                if(rect.left - newX>0 && rect.top - newY>0){
+                if(rect.left - newX>0 && rect.top - newY>0 && h>rect.bottom && w > rect.right){
 
                     divContainer.style.left = rect.left - newX + "px";
                     divContainer.style.top = rect.top - newY + "px";
